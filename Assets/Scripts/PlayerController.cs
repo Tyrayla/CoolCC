@@ -73,21 +73,21 @@ public class NewTestMovement : MonoBehaviour
 
 
         //Set Y Limit
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             ylimit = true;
         }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
         {
             ylimit = false;
         }
 
         //Set X Limit
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             xlimit = true;
         }
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
         {
             xlimit = false;
         }
@@ -158,15 +158,15 @@ public class NewTestMovement : MonoBehaviour
     {
         if (halfway)
         {
-            water = 15;
+            water = 2;
         }
         else if (threeFourths)
         {
-            water = 10;
+            water = 3;
         }
         else
         {
-            water = 20;
+            water = 4;
         }
         updateWaterTextAndSubtract(false);
     }
