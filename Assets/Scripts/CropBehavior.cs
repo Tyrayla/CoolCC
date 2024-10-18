@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class cropBehavior : MonoBehaviour
 {
@@ -11,11 +13,12 @@ public class cropBehavior : MonoBehaviour
 
     public SpriteRenderer tempColorChange;
 
-    private Color tempColor1 = Color.red;
-    private Color tempColor2= Color.blue;
-    private Color tempColor3 = Color.yellow;
-    private Color tempColor4 = Color.green;
-    private Color tempColor5 = Color.magenta;
+    private UnityEngine.Color tempColor0 = UnityEngine.Color.gray;
+    private UnityEngine.Color tempColor1 = UnityEngine.Color.red;
+    private UnityEngine.Color tempColor2= UnityEngine.Color.blue;
+    private UnityEngine.Color tempColor3 = UnityEngine.Color.yellow;
+    private UnityEngine.Color tempColor4 = UnityEngine.Color.green;
+    private UnityEngine.Color tempColor5 = UnityEngine.Color.magenta;
     // Start is called before the first frame update
 
     public float startTime;
@@ -90,6 +93,13 @@ public class cropBehavior : MonoBehaviour
             }
 
         }
+    }
+
+    public void pickedCrop()
+    {
+        tempColorChange.color =tempColor0;
+        hasSeed = false;
+        hasWater = false;
     }
 
 }

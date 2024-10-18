@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -18,16 +19,23 @@ public class NewTestMovement : MonoBehaviour
     public int water = 0;
     private bool halfway = false;
     private bool threeFourths = false;
-    public Text alertBoxText;
+    
 
     public cropBehavior targetCrop;
 
+    //Timers used to update intervals without breaking the update loop
     public float waterCoolDown = 0.5f;
     private float waterCooldownNextUse = 0;
     private float seedCoolDown = 0.5f;
     private float seedCooldownNextUse = 0;
     public float gapTimer = 0.5f;
     private float gapTimerNextUse = 0;
+    public float pickedGapTimer = 0.5f;
+    private float pickedGapTimerNextUse = 0;
+    public float coinTimer = 0.5f;
+    private float coinTimerNextUse = 0;
+    public float investScoreTimer = 0.5f;
+    private float investScoreTimerNextUse = 0;
 
     //this is a place holder for better UI later, to be replaced by an image updater
     public Text tempWaterPlaceholder;
@@ -38,9 +46,15 @@ public class NewTestMovement : MonoBehaviour
     public Text tempInventorySlot3;
     public Text tempInventorySlot4;
     public Text tempInventorySlot5;
+    public Text coinBox;
+    public Text scoreBox;
+    public Text alertBoxText;
 
     // 0 corresponds with empty, 1 with seed, 2 with full crop
     private int[] inventory;
+
+    private int coins;
+    private int score;
 
 
     [SerializeField]
@@ -55,6 +69,8 @@ public class NewTestMovement : MonoBehaviour
             inventory[i] = 0;
         }
         updateInventoryText();
+        coins = 0;
+        score = 0;
       
 
     }
@@ -115,14 +131,24 @@ public class NewTestMovement : MonoBehaviour
                     targetCrop = lasttouchedObject.GetComponent<cropBehavior>();
                     if (targetCrop.hasSeed)
                     {
-                        if (water > 0)
+                        if (targetCrop.growthStage == 1)
                         {
-                            updateWaterTextAndSubtract(true);
+                            if (water > 0)
+                            {
+                                updateWaterTextAndSubtract(true);
+                            }
+                        }else if (targetCrop.growthStage == 4)
+                        {
+                            grabCrop();
                         }
                     }
                     else
                     {
-                        playerPlantSeed();
+                        if (Time.time >pickedGapTimerNextUse) { 
+                            playerPlantSeed();
+                            pickedGapTimerNextUse = Time.time + pickedGapTimer;
+                        }
+                        
                     }
                     
                 }
@@ -135,6 +161,22 @@ public class NewTestMovement : MonoBehaviour
                 if (lastTouched.Contains("SeedsBox"))
                 {
                     getSeedFromBox();
+                }
+                if (lastTouched.Contains("SellTruck"))
+                {
+                    if (Time.time > coinTimerNextUse)
+                    {
+                        sellCrops();
+                        coinTimerNextUse = Time.time + coinTimer;
+                    }
+                }
+                if (lastTouched.Contains("InvestInScore"))
+                {
+                    if(Time.time > investScoreTimerNextUse)
+                    {
+                        investScore();
+                        investScoreTimerNextUse = Time.time + investScoreTimer;
+                    }
                 }
             }
 
@@ -316,8 +358,65 @@ public class NewTestMovement : MonoBehaviour
         
     }
 
+    private void grabCrop()
+    {
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == 0)
+            {
+                inventory[i] = 2;
+                break;
+            }
+        }
+        targetCrop.growthStage = 0;
+        updateInventoryText();
+        targetCrop.pickedCrop();
+    }
 
+    private void sellCrops()
+    {
+        int count2 = 0;
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == 2)
+            {
+                inventory[i] = 0;
+                count2++;
+            }
+        }
+        coins += count2;
+        score += count2 * 100;
+        updateCoins();
+        updateScore();
+        updateInventoryText();
+    }
 
+    private void updateCoins()
+    {
+        string temp = "Cash: " + coins;
+        coinBox.text = temp;
+    }
+
+    private void updateScore()
+    {
+        string temp = "Score: " + score;
+        scoreBox.text = temp;
+    }
+
+    private void investEco()
+    {
+
+    }
+
+    private void investScore()
+    {
+        int temp2;
+        temp2 = coins;
+        coins = 0;
+        score = temp2 * 100;
+        updateScore();
+        investScore();
+    }
 
 
 }
