@@ -36,6 +36,8 @@ public class NewTestMovement : MonoBehaviour
     private float coinTimerNextUse = 0;
     public float investScoreTimer = 0.5f;
     private float investScoreTimerNextUse = 0;
+    public float ecoTimer = 0.5f;
+    private float ecoTimerNextUse = 0;
 
     //this is a place holder for better UI later, to be replaced by an image updater
     public Text tempWaterPlaceholder;
@@ -49,12 +51,19 @@ public class NewTestMovement : MonoBehaviour
     public Text coinBox;
     public Text scoreBox;
     public Text alertBoxText;
+    public Text gameOver;
 
     // 0 corresponds with empty, 1 with seed, 2 with full crop
     private int[] inventory;
 
     private int coins;
     private int score;
+
+    //Code from a countdown Timer tutorial https://www.youtube.com/watch?v=hxpUk0qiRGs&list=LL&index=3&ab_channel=TheGameGuy (Found in Udate Timer Fucntion and in the Update)
+    public float TimeLeft;
+    public Text TimerText;
+    public bool timerOn;
+    
 
 
     [SerializeField]
@@ -71,14 +80,25 @@ public class NewTestMovement : MonoBehaviour
         updateInventoryText();
         coins = 0;
         score = 0;
-      
-
+        gameOver.text = "";
     }
 
     void Update()
     {
         movePlayer();
         playerControls();
+        if (TimeLeft > 0)
+        {
+            TimeLeft-=Time.deltaTime;
+            UpdateTimer(TimeLeft);
+            timerOn = true;
+        }
+        else
+        {
+            TimeLeft = 0;
+            timerOn = false;
+            gameOver.text = "Game Over";
+        }
 
     }
 
@@ -87,41 +107,44 @@ public class NewTestMovement : MonoBehaviour
         float movementX = Input.GetAxisRaw("Horizontal");
         float movementY = Input.GetAxisRaw("Vertical");
 
+        if (timerOn)
+        {
+            //Set Y Limit
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                ylimit = true;
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            {
+                ylimit = false;
+            }
 
-        //Set Y Limit
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            ylimit = true;
-        }
-        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
-        {
-            ylimit = false;
-        }
-
-        //Set X Limit
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            xlimit = true;
-        }
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
-        {
-            xlimit = false;
-        }
+            //Set X Limit
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                xlimit = true;
+            }
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+            {
+                xlimit = false;
+            }
 
 
-        //actual movement
-        if (xlimit == false)
-        {
-            transform.position = transform.position + new Vector3(movementX * speedX * Time.deltaTime, 0, 0);
-        }
-        if (ylimit == false)
-        {
-            transform.position = transform.position + new Vector3(0, movementY * speedX * Time.deltaTime, 0);
+            //actual movement
+            if (xlimit == false)
+            {
+                transform.position = transform.position + new Vector3(movementX * speedX * Time.deltaTime, 0, 0);
+            }
+            if (ylimit == false)
+            {
+                transform.position = transform.position + new Vector3(0, movementY * speedX * Time.deltaTime, 0);
+            }
         }
     }
 
     private void playerControls()
     {
+        if (timerOn) {
         if (Input.GetKey(KeyCode.Space))
         {
             if (spaceLimit)
@@ -137,20 +160,27 @@ public class NewTestMovement : MonoBehaviour
                             {
                                 updateWaterTextAndSubtract(true);
                             }
-                        }else if (targetCrop.growthStage == 4)
+                        }
+                        else if (targetCrop.growthStage == 4)
                         {
                             grabCrop();
+                        }
+                        else if (targetCrop.growthStage == 5)
+                        {
+                            targetCrop.growthStage = 0;
+                            targetCrop.pickedCrop();
                         }
                     }
                     else
                     {
-                        if (Time.time >pickedGapTimerNextUse) { 
+                        if (Time.time > pickedGapTimerNextUse)
+                        {
                             playerPlantSeed();
                             pickedGapTimerNextUse = Time.time + pickedGapTimer;
                         }
-                        
+
                     }
-                    
+
                 }
 
                 if (lastTouched.Contains("Water"))
@@ -172,15 +202,25 @@ public class NewTestMovement : MonoBehaviour
                 }
                 if (lastTouched.Contains("InvestInScore"))
                 {
-                    if(Time.time > investScoreTimerNextUse)
+                    if (Time.time > investScoreTimerNextUse)
                     {
                         investScore();
                         investScoreTimerNextUse = Time.time + investScoreTimer;
                     }
                 }
+                if (lastTouched.Contains("InvestInEco"))
+                {
+                    if (Time.time > ecoTimerNextUse)
+                    {
+                        investEco();
+                        investScoreTimerNextUse = Time.time + investScoreTimer;
+                    }
+
+                }
             }
 
         }
+    }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -405,7 +445,11 @@ public class NewTestMovement : MonoBehaviour
 
     private void investEco()
     {
-
+        int temp;
+        temp = coins;
+        coins = 0;
+        TimeLeft += temp * 15f;
+        updateCoins();
     }
 
     private void investScore()
@@ -413,9 +457,20 @@ public class NewTestMovement : MonoBehaviour
         int temp2;
         temp2 = coins;
         coins = 0;
-        score = temp2 * 100;
+        score += temp2 * 100;
+        Debug.Log(temp2); ;
         updateScore();
-        investScore();
+        updateCoins();
+    }
+
+    //Code refrenced in Timer Video Credit in variables
+    private void UpdateTimer(float current)
+    {
+        current += 1;
+        float minuetes = Mathf.FloorToInt(current / 60);
+        float seconds = Mathf.FloorToInt(current % 60);
+        TimerText.text = string.Format("{0:00} : {1:00}",minuetes,seconds);
+
     }
 
 
