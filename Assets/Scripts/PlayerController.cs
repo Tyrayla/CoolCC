@@ -99,6 +99,16 @@ public class NewTestMovement : MonoBehaviour
             timerOn = false;
             gameOver.text = "Game Over";
         }
+        if (TimeLeft < 90f)
+        {
+            halfway = true;
+        }
+        if (TimeLeft < 45f)
+        {
+            halfway = false;
+            threeFourths = true;
+        }
+       
 
     }
 
@@ -240,7 +250,7 @@ public class NewTestMovement : MonoBehaviour
     {
         if (halfway)
         {
-            water = 2;
+            water = 5;
         }
         else if (threeFourths)
         {
@@ -248,7 +258,7 @@ public class NewTestMovement : MonoBehaviour
         }
         else
         {
-            water = 4;
+            water = 10;
         }
         updateWaterTextAndSubtract(false);
     }
@@ -448,7 +458,14 @@ public class NewTestMovement : MonoBehaviour
         int temp;
         temp = coins;
         coins = 0;
-        TimeLeft += temp * 15f;
+        if (temp * 5f < 180)
+        {
+            TimeLeft += temp * 5f;
+        }
+        else
+        {
+            TimeLeft = 180;
+        }
         updateCoins();
     }
 

@@ -58,7 +58,7 @@ public class cropBehavior : MonoBehaviour
         Debug.Log("watered");
         hasWater = true;
         startTime = Time.time;
-        randomGrowthTime = UnityEngine.Random.Range(1f,5f);
+        randomGrowthTime = UnityEngine.Random.Range(10f,15f);
     }
 
     public void grow()
