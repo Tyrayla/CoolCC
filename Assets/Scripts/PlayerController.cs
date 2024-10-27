@@ -105,7 +105,6 @@ public class NewTestMovement : MonoBehaviour
         }
         if (TimeLeft < 45f)
         {
-            halfway = false;
             threeFourths = true;
         }
        
@@ -251,10 +250,11 @@ public class NewTestMovement : MonoBehaviour
         if (halfway)
         {
             water = 5;
-        }
-        else if (threeFourths)
-        {
-            water = 3;
+            if (threeFourths)
+            {
+                water = 3;
+            }
+            
         }
         else
         {
