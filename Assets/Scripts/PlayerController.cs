@@ -23,6 +23,13 @@ public class NewTestMovement : MonoBehaviour
 
     public cropBehavior targetCrop;
 
+    // Alex: audio stuff
+    public AudioSource audioSource;
+    public AudioClip interactSound;
+    public AudioClip cropHarvestSound;
+    public AudioClip itemPickupSound;
+    public AudioClip sellSound;
+
     //Timers used to update intervals without breaking the update loop
     public float waterCoolDown = 0.5f;
     private float waterCooldownNextUse = 0;
@@ -101,12 +108,15 @@ public class NewTestMovement : MonoBehaviour
         }
         if (TimeLeft < 90f)
         {
+            // Alex: I can add sounds here to trigger on each part way but we'd need to change the logic so they don't continue play. I'd recommend we check for every 25% within like 1s and then call the sounds then and update the values once
+            // At the moment it looks like itll check this basically everytime the value time left is < the specified amount
             halfway = true;
         }
         if (TimeLeft < 45f)
         {
             threeFourths = true;
         }
+
        
 
     }
@@ -260,6 +270,7 @@ public class NewTestMovement : MonoBehaviour
         {
             water = 10;
         }
+        audioSource.PlayOneShot(interactSound);
         updateWaterTextAndSubtract(false);
     }
 
@@ -381,6 +392,7 @@ public class NewTestMovement : MonoBehaviour
         {
             alertBoxText.text = "Seed Cooldown, Can Use again in 1 second";
         }
+        audioSource.PlayOneShot(itemPickupSound);
         updateInventoryText();
     }
 
@@ -403,6 +415,7 @@ public class NewTestMovement : MonoBehaviour
         {
             gapTimerNextUse = Time.time + gapTimer;
             targetCrop.plantSeed();
+            audioSource.PlayOneShot(interactSound);
             targetCrop.hasSeed = true;
         }
         
@@ -418,6 +431,7 @@ public class NewTestMovement : MonoBehaviour
                 break;
             }
         }
+        audioSource.PlayOneShot(cropHarvestSound);
         targetCrop.growthStage = 0;
         updateInventoryText();
         targetCrop.pickedCrop();
@@ -436,6 +450,7 @@ public class NewTestMovement : MonoBehaviour
         }
         coins += count2;
         score += count2 * 100;
+        audioSource.PlayOneShot(sellSound);
         updateCoins();
         updateScore();
         updateInventoryText();

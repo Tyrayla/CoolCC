@@ -11,6 +11,7 @@ public class cropBehavior : MonoBehaviour
     public bool hasSeed;
     public int growthStage;
 
+
     public SpriteRenderer tempColorChange;
 
     private UnityEngine.Color tempColor0 = UnityEngine.Color.gray;
