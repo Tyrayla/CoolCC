@@ -24,9 +24,17 @@ public class cropBehavior : MonoBehaviour
 
     public float startTime;
     public float randomGrowthTime;
+
+    public Sprite stage0;
+    public Sprite stage1;  
+    public Sprite stage2;
+    public Sprite stage3;
+    public Sprite stage4;
+    public Sprite stage5;
     void Start()
     {
         growthStage = 0;
+        tempColorChange.sprite = stage0;
         //growth stage 0: No Seed No Water, Temp Color: brown
         //Stage 1: Seed No Water, Temp Color: red
         //Stage 2: Seed + Water = first stage of crop, Temp Color: blue
@@ -45,17 +53,20 @@ public class cropBehavior : MonoBehaviour
 
     public void plantSeed()
     {
-        tempColorChange.color = tempColor1;
+        //tempColorChange.color = tempColor1;
+
         Debug.Log("planted");
         hasSeed = true;
         growthStage=1;
+        tempColorChange.sprite = stage1;
         
     }
 
     public void waterCrop()
     {
         growthStage = 2;
-        tempColorChange.color = tempColor2;
+        tempColorChange.sprite = stage2;
+        //tempColorChange.color = tempColor2;
         Debug.Log("watered");
         hasWater = true;
         startTime = Time.time;
@@ -69,7 +80,8 @@ public class cropBehavior : MonoBehaviour
             if (Time.time >= startTime+ randomGrowthTime)
             {
                 growthStage = 3;
-                tempColorChange.color= tempColor3;
+                
+                tempColorChange.sprite= stage3;
                 startTime = Time.time;
             }
 
@@ -79,7 +91,7 @@ public class cropBehavior : MonoBehaviour
             if (Time.time >= startTime + randomGrowthTime)
             {
                 growthStage = 4;
-                tempColorChange.color = tempColor4;
+                tempColorChange.sprite= stage4;
                 startTime = Time.time;
             }
 
@@ -89,7 +101,7 @@ public class cropBehavior : MonoBehaviour
             if (Time.time >= startTime + randomGrowthTime + 5f)
             {
                 growthStage = 5;
-                tempColorChange.color = tempColor5;
+                tempColorChange.sprite = stage5;
                 startTime = Time.time;
             }
 
@@ -98,7 +110,7 @@ public class cropBehavior : MonoBehaviour
 
     public void pickedCrop()
     {
-        tempColorChange.color =tempColor0;
+        tempColorChange.sprite = stage0;
         hasSeed = false;
         hasWater = false;
     }

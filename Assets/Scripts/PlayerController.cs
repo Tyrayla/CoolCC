@@ -45,6 +45,8 @@ public class NewTestMovement : MonoBehaviour
     private float investScoreTimerNextUse = 0;
     public float ecoTimer = 0.5f;
     private float ecoTimerNextUse = 0;
+    private float waterSoundTimer = 0.5f;
+    private float waterSoundTimerNextUse = 0;
 
     //this is a place holder for better UI later, to be replaced by an image updater
     public Text tempWaterPlaceholder;
@@ -70,6 +72,9 @@ public class NewTestMovement : MonoBehaviour
     public float TimeLeft;
     public Text TimerText;
     public bool timerOn;
+
+    //Animator Stuff
+    public Animator animator;
     
 
 
@@ -146,6 +151,38 @@ public class NewTestMovement : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
             {
                 xlimit = false;
+            }
+
+            if (Input.GetKeyDown(KeyCode.A)||Input.GetKeyDown(KeyCode.LeftArrow)){
+                animator.SetBool("PlayerMovingLeft", true);
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                animator.SetBool("PlayerMovingLeft", false);
+            }
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                animator.SetBool("PlayerMovingRight", true);
+            }
+            if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                animator.SetBool("PlayerMovingRight", false);
+            }
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                animator.SetBool("PlayerMovingUp", true);
+            }
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                animator.SetBool("PlayerMovingUp", false);
+            }
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                animator.SetBool("PlayerMovingDown", true);
+            }
+            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                animator.SetBool("PlayerMovingDown", false);
             }
 
 
@@ -257,6 +294,9 @@ public class NewTestMovement : MonoBehaviour
 
     private void updateWater()
     {
+
+        audioSource.PlayOneShot(interactSound);
+
         if (halfway)
         {
             water = 5;
@@ -270,8 +310,12 @@ public class NewTestMovement : MonoBehaviour
         {
             water = 10;
         }
-        audioSource.PlayOneShot(interactSound);
-        updateWaterTextAndSubtract(false);
+        if (Time.time > waterSoundTimerNextUse)
+        {
+            updateWaterTextAndSubtract(false);
+            waterSoundTimerNextUse = Time.time + waterSoundTimer;
+        }
+        
     }
 
     private void updateWaterTextAndSubtract(bool subtract)
@@ -281,6 +325,7 @@ public class NewTestMovement : MonoBehaviour
             //added a 1 second timer from youtube tutorial: https://www.youtube.com/watch?v=NX8cX3osMFc&ab_channel=Bilal
             if (Time.time > waterCooldownNextUse && Time.time>gapTimerNextUse)
             {
+                
                 //here is the call to water the crop
                 if (targetCrop.hasSeed&&!targetCrop.hasWater)
                 {
@@ -288,6 +333,7 @@ public class NewTestMovement : MonoBehaviour
                     waterCooldownNextUse = Time.time + waterCoolDown;
                     targetCrop.hasWater = true;
                     targetCrop.waterCrop();
+                    
                 }
                 
             }
@@ -381,6 +427,7 @@ public class NewTestMovement : MonoBehaviour
             seedCooldownNextUse = Time.time + seedCoolDown;
             for (int i = 0; i < inventory.Length; i++)
             {
+                audioSource.PlayOneShot(itemPickupSound);
                 if (inventory[i] == 0)
                 {
                     inventory[i] = 1;
@@ -392,7 +439,7 @@ public class NewTestMovement : MonoBehaviour
         {
             alertBoxText.text = "Seed Cooldown, Can Use again in 1 second";
         }
-        audioSource.PlayOneShot(itemPickupSound);
+        
         updateInventoryText();
     }
 

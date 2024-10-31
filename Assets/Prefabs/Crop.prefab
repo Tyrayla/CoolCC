@@ -153,6 +153,12 @@ MonoBehaviour:
   tempColorChange: {fileID: 4729574448564052280}
   startTime: 0
   randomGrowthTime: 0
+  stage0: {fileID: 2476957488115199411, guid: 74ade4fb6bd6a464a8525a63fb663b12, type: 3}
+  stage1: {fileID: -7528157663514671612, guid: 74ade4fb6bd6a464a8525a63fb663b12, type: 3}
+  stage2: {fileID: -3156507234163891668, guid: 74ade4fb6bd6a464a8525a63fb663b12, type: 3}
+  stage3: {fileID: 3019867061168765307, guid: 74ade4fb6bd6a464a8525a63fb663b12, type: 3}
+  stage4: {fileID: 88689493033026854, guid: 74ade4fb6bd6a464a8525a63fb663b12, type: 3}
+  stage5: {fileID: -2994529821662826946, guid: 74ade4fb6bd6a464a8525a63fb663b12, type: 3}
 --- !u!82 &-4569280300593457951
 AudioSource:
   m_ObjectHideFlags: 0
