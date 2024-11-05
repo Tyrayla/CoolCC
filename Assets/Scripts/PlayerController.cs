@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NewTestMovement : MonoBehaviour
 {
@@ -77,7 +78,11 @@ public class NewTestMovement : MonoBehaviour
 
     //Animator Stuff
     public Animator animator;
-    
+
+    // pause menu stuff
+    private bool paused = false;
+    [SerializeField] GameObject pauseMenu;
+
 
 
     [SerializeField]
@@ -206,7 +211,8 @@ public class NewTestMovement : MonoBehaviour
 
     private void playerControls()
     {
-        if (timerOn) {
+        if (timerOn) 
+        {
         if (Input.GetKey(KeyCode.Space))
         {
             if (spaceLimit)
@@ -282,6 +288,22 @@ public class NewTestMovement : MonoBehaviour
             }
 
         }
+            if (Input.GetKey(KeyCode.P) && paused == false)
+            {
+                Pause();
+                paused = true;
+                //SceneManager.LoadScene(sceneName:"PauseMenu");
+            }
+            if (Input.GetKey(KeyCode.R) && paused == true)
+            {
+                Resume();
+                paused = false;
+                //SceneManager.LoadScene(sceneName:"MainLevel");
+            }
+            if (Input.GetKey(KeyCode.F))
+            {
+                SceneManager.LoadScene(sceneName: "MainLevel");
+            }
     }
     }
 
@@ -560,5 +582,18 @@ public class NewTestMovement : MonoBehaviour
 
     }
 
+
+
+    public void Pause()
+    {
+        //pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Resume()
+    {
+        //pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
 
 }
