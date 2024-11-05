@@ -140,7 +140,7 @@ public class NewTestMovement : MonoBehaviour
             {
                 ylimit = true;
             }
-            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
             {
                 ylimit = false;
             }
@@ -150,7 +150,7 @@ public class NewTestMovement : MonoBehaviour
             {
                 xlimit = true;
             }
-            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 xlimit = false;
             }
@@ -158,7 +158,7 @@ public class NewTestMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A)||Input.GetKeyDown(KeyCode.LeftArrow)){
                 animator.SetBool("PlayerMovingLeft", true);
             }
-            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
             {
                 animator.SetBool("PlayerMovingLeft", false);
             }
@@ -166,7 +166,7 @@ public class NewTestMovement : MonoBehaviour
             {
                 animator.SetBool("PlayerMovingRight", true);
             }
-            if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
             {
                 animator.SetBool("PlayerMovingRight", false);
             }
@@ -174,7 +174,7 @@ public class NewTestMovement : MonoBehaviour
             {
                 animator.SetBool("PlayerMovingUp", true);
             }
-            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
             {
                 animator.SetBool("PlayerMovingUp", false);
             }
@@ -182,7 +182,7 @@ public class NewTestMovement : MonoBehaviour
             {
                 animator.SetBool("PlayerMovingDown", true);
             }
-            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 animator.SetBool("PlayerMovingDown", false);
             }
@@ -196,6 +196,10 @@ public class NewTestMovement : MonoBehaviour
             if (ylimit == false)
             {
                 transform.position = transform.position + new Vector3(0, movementY * speedX * Time.deltaTime, 0);
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftArrow)){
+                Debug.Log("Left");
             }
         }
     }
