@@ -6726,16 +6726,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 2123796756}
     m_Modifications:
     - target: {fileID: 2841601042929508925, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1805535494988789611, guid: 06878105ba11d7742b2acea4b4af193e, type: 3}
+    - target: {fileID: 2841601042929508925, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_Color.b
-      value: 0.9622642
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2841601042929508925, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_Color.g
-      value: 0.20440711
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2841601042929508925, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_Color.r
-      value: 0.031772893
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2841601042929508925, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_SortingOrder
