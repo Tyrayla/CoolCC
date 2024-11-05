@@ -29,6 +29,8 @@ public class NewTestMovement : MonoBehaviour
     public AudioClip cropHarvestSound;
     public AudioClip itemPickupSound;
     public AudioClip sellSound;
+    public AudioClip pickupWaterSound;
+    public AudioClip waterSound;
 
     //Timers used to update intervals without breaking the update loop
     public float waterCoolDown = 0.5f;
@@ -295,8 +297,6 @@ public class NewTestMovement : MonoBehaviour
     private void updateWater()
     {
 
-        audioSource.PlayOneShot(interactSound);
-
         if (halfway)
         {
             water = 5;
@@ -314,6 +314,7 @@ public class NewTestMovement : MonoBehaviour
         {
             updateWaterTextAndSubtract(false);
             waterSoundTimerNextUse = Time.time + waterSoundTimer;
+            audioSource.PlayOneShot(pickupWaterSound, 0.4f);
         }
         
     }
@@ -329,6 +330,7 @@ public class NewTestMovement : MonoBehaviour
                 //here is the call to water the crop
                 if (targetCrop.hasSeed&&!targetCrop.hasWater)
                 {
+                    audioSource.PlayOneShot(waterSound,0.5f);
                     water--;
                     waterCooldownNextUse = Time.time + waterCoolDown;
                     targetCrop.hasWater = true;
@@ -427,7 +429,7 @@ public class NewTestMovement : MonoBehaviour
             seedCooldownNextUse = Time.time + seedCoolDown;
             for (int i = 0; i < inventory.Length; i++)
             {
-                audioSource.PlayOneShot(itemPickupSound);
+                audioSource.PlayOneShot(itemPickupSound, 0.4f);
                 if (inventory[i] == 0)
                 {
                     inventory[i] = 1;
@@ -462,7 +464,7 @@ public class NewTestMovement : MonoBehaviour
         {
             gapTimerNextUse = Time.time + gapTimer;
             targetCrop.plantSeed();
-            audioSource.PlayOneShot(interactSound);
+            audioSource.PlayOneShot(cropHarvestSound, 0.6f);
             targetCrop.hasSeed = true;
         }
         
@@ -478,7 +480,7 @@ public class NewTestMovement : MonoBehaviour
                 break;
             }
         }
-        audioSource.PlayOneShot(cropHarvestSound);
+        audioSource.PlayOneShot(cropHarvestSound, 0.8f);
         targetCrop.growthStage = 0;
         updateInventoryText();
         targetCrop.pickedCrop();
@@ -497,10 +499,10 @@ public class NewTestMovement : MonoBehaviour
         }
         coins += count2;
         score += count2 * 100;
-        audioSource.PlayOneShot(sellSound);
         updateCoins();
         updateScore();
         updateInventoryText();
+        audioSource.PlayOneShot(sellSound);
     }
 
     private void updateCoins()
@@ -529,6 +531,7 @@ public class NewTestMovement : MonoBehaviour
             TimeLeft = 180;
         }
         updateCoins();
+        audioSource.PlayOneShot(sellSound);
     }
 
     private void investScore()
@@ -540,6 +543,7 @@ public class NewTestMovement : MonoBehaviour
         Debug.Log(temp2); ;
         updateScore();
         updateCoins();
+        audioSource.PlayOneShot(sellSound);
     }
 
     //Code refrenced in Timer Video Credit in variables

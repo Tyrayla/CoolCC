@@ -1738,8 +1738,10 @@ MonoBehaviour:
   audioSource: {fileID: 915064558}
   interactSound: {fileID: 8300000, guid: 708e1705224ee2d40bbf14323fb2d069, type: 3}
   cropHarvestSound: {fileID: 8300000, guid: 9b36bbc4501d67e4fb707d6ee3dfc68f, type: 3}
-  itemPickupSound: {fileID: 8300000, guid: a4c5bc9f6768e3f499eed4c767f53edc, type: 3}
+  itemPickupSound: {fileID: 8300000, guid: 5c7ac1d0dbe469d45a4429d1f592b6ff, type: 3}
   sellSound: {fileID: 8300000, guid: 7b91fb2ab0b47e94894b2ad07fd8859a, type: 3}
+  pickupWaterSound: {fileID: 8300000, guid: 0d6bf81ebb611a3469d318e3915109da, type: 3}
+  waterSound: {fileID: 8300000, guid: 98a2a324461aab3408d31973593beec8, type: 3}
   waterCoolDown: 0.5
   gapTimer: 0.5
   pickedGapTimer: 0.5
