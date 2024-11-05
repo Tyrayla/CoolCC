@@ -6747,11 +6747,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2988628429714261052, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 22
+      value: 19.3
       objectReference: {fileID: 0}
     - target: {fileID: 2988628429714261052, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.75
+      value: 4.413625
       objectReference: {fileID: 0}
     - target: {fileID: 2988628429714261052, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6759,7 +6759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2988628429714261052, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -252.54749
+      value: -251.77
       objectReference: {fileID: 0}
     - target: {fileID: 2988628429714261052, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6796,6 +6796,22 @@ PrefabInstance:
     - target: {fileID: 7491124904920084328, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
       propertyPath: m_Name
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131149370030887373, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.40152797
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131149370030887373, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.10316451
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131149370030887373, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131149370030887373, guid: 99517d8c9f6865e42bbc1577b50e46c3, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.96
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

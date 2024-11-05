@@ -116,6 +116,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: PlayerMovingRight
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsGoingRight
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7071665924780936093}
   m_Solo: 0
@@ -168,6 +171,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: PlayerMovingLeft
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: IsGoingLeft
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3679149546261160108}
   m_Solo: 0
@@ -218,6 +224,9 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
+    m_ConditionEvent: PlayerMovingUp
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
     m_ConditionEvent: PlayerMovingUp
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -273,6 +282,30 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: IsGoingLeft
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: IsGoingRight
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: IsGoingUp
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: IsGoingDown
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -322,6 +355,9 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
+    m_ConditionEvent: PlayerMovingDown
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
     m_ConditionEvent: PlayerMovingDown
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
