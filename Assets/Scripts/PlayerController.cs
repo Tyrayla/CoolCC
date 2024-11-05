@@ -300,11 +300,11 @@ public class NewTestMovement : MonoBehaviour
                 paused = false;
                 //SceneManager.LoadScene(sceneName:"MainLevel");
             }
-            if (Input.GetKey(KeyCode.F))
-            {
-                SceneManager.LoadScene(sceneName: "MainLevel");
-            }
     }
+        if (Input.GetKey(KeyCode.F))
+        {
+            SceneManager.LoadScene(sceneName: "MainLevel");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
