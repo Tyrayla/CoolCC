@@ -1707,7 +1707,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Water Level
 --- !u!222 &876332840
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5156,6 +5156,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1267124245}
     m_Modifications:
+    - target: {fileID: 1239319441376012893, guid: 710292e8f8f57f04a9d884b843db4121, type: 3}
+      propertyPath: m_Text
+      value: Alert Box
+      objectReference: {fileID: 0}
     - target: {fileID: 1239319441376012893, guid: 710292e8f8f57f04a9d884b843db4121, type: 3}
       propertyPath: m_FontData.m_MaxSize
       value: 300

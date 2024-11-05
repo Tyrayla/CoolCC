@@ -346,7 +346,7 @@ public class NewTestMovement : MonoBehaviour
         }
         string temp = "Water: " + water.ToString();
         alertBoxText.text = temp;
-        tempWaterPlaceholder.text = water.ToString();
+        tempWaterPlaceholder.text = "Water: " + water.ToString();
     }
 
     private void updateInventoryText()
