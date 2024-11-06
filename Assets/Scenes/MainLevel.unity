@@ -6354,6 +6354,10 @@ PrefabInstance:
       value: Temperature
       objectReference: {fileID: 0}
     - target: {fileID: 3578778118544638035, guid: 02c0b587d6587284584a264e666c7447, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8972677083782799128, guid: 2f8b7f2c19dea7244b47d096a7fb7a9e, type: 3}
+    - target: {fileID: 3578778118544638035, guid: 02c0b587d6587284584a264e666c7447, type: 3}
       propertyPath: m_Color.a
       value: 0.39215687
       objectReference: {fileID: 0}

@@ -182,7 +182,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ThermometerTimer_OneFourth_0: 668894420222929462
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
