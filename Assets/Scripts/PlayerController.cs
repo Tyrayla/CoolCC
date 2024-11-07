@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class NewTestMovement : MonoBehaviour
 {
@@ -50,19 +51,27 @@ public class NewTestMovement : MonoBehaviour
     private float ecoTimerNextUse = 0;
     private float waterSoundTimer = 0.5f;
     private float waterSoundTimerNextUse = 0;
+    private float investInEcoSoundTimer = 0.5f;
+    private float investInEcoSoundTimerNextUse = 0;
+    private float investInScoreSoundTimer = 0.5f;
+    private float investInScoreSoundTimerNextUse = 0;
+    private float sellSoundTimer = 0.5f;
+    private float sellSoundTimerNextUse = 0;
 
     //this is a place holder for better UI later, to be replaced by an image updater
-    public Text tempWaterPlaceholder;
+    //public Text tempWaterPlaceholder;
 
     //these are place holders for UI assests aswell, same as the last
-    public Text tempInventorySlot1;
-    public Text tempInventorySlot2;
-    public Text tempInventorySlot3;
-    public Text tempInventorySlot4;
-    public Text tempInventorySlot5;
+    //public Text tempInventorySlot1;
+    //public Text tempInventorySlot2;
+    //public Text tempInventorySlot3;
+    //public Text tempInventorySlot4;
+    //public Text tempInventorySlot5;
+
+    //Actual Text UI
     public Text coinBox;
     public Text scoreBox;
-    public Text alertBoxText;
+    //public Text alertBoxText;
     public Text gameOver;
 
     // 0 corresponds with empty, 1 with seed, 2 with full crop
@@ -73,8 +82,10 @@ public class NewTestMovement : MonoBehaviour
 
     //Code from a countdown Timer tutorial https://www.youtube.com/watch?v=hxpUk0qiRGs&list=LL&index=3&ab_channel=TheGameGuy (Found in Udate Timer Fucntion and in the Update)
     public float TimeLeft;
-    public Text TimerText;
+    private float visualTimer;
+    //public Text TimerText;
     public bool timerOn;
+    public Slider temperatureSlider;
 
     //Animator Stuff
     public Animator animator;
@@ -83,8 +94,26 @@ public class NewTestMovement : MonoBehaviour
     private bool paused = false;
     [SerializeField] GameObject pauseMenu;
 
+    //Inventory UI Setup
+    public GameObject inventorySlotOneSprite;
+    public GameObject inventorySlotTwoSprite;
+    public GameObject inventorySlotThreeSprite;
+    public GameObject inventorySlotFourSprite;
+    public GameObject inventorySlotFiveSprite;
+    public GameObject inventorySlotWaterSprite;
+    public GameObject BackgroundInvetorySprite;
+    public GameObject BackgroundWater;
 
+    //Sprites
+    public Sprite carrot;
+    public Sprite seed;
+    public Sprite EmptySlot;
+    public Sprite waterEmpty;
+    public Sprite waterOneThird;
+    public Sprite waterTwoThirds;
+    public Sprite waterFull;
 
+    //SpeedSetup
     [SerializeField]
     private float speedX = 1f;
 
@@ -100,16 +129,40 @@ public class NewTestMovement : MonoBehaviour
         coins = 0;
         score = 0;
         gameOver.text = "";
+        visualTimer = 0;
     }
 
     void Update()
     {
         movePlayer();
         playerControls();
+        if (transform.position.y< -1.65)
+        {
+            BackgroundInvetorySprite.GetComponent<Image>().color = new Color(1,1,1,0.3f);
+            inventorySlotOneSprite.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+            inventorySlotTwoSprite.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+            inventorySlotThreeSprite.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+            inventorySlotFourSprite.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+            inventorySlotFiveSprite.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+            inventorySlotWaterSprite.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+            BackgroundWater.GetComponent<Image>().color = new Color(1, 1, 1, 0.3f);
+        }
+        else
+        {
+            BackgroundInvetorySprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            inventorySlotOneSprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            inventorySlotTwoSprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            inventorySlotThreeSprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            inventorySlotFourSprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            inventorySlotFiveSprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            inventorySlotWaterSprite.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            BackgroundWater.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        }
         if (TimeLeft > 0)
         {
+            visualTimer += Time.deltaTime;
             TimeLeft-=Time.deltaTime;
-            UpdateTimer(TimeLeft);
+            UpdateTimer(TimeLeft,visualTimer);
             timerOn = true;
         }
         else
@@ -117,6 +170,7 @@ public class NewTestMovement : MonoBehaviour
             TimeLeft = 0;
             timerOn = false;
             gameOver.text = "Game Over";
+            visualTimer = 180f;
         }
         if (TimeLeft < 90f)
         {
@@ -367,12 +421,28 @@ public class NewTestMovement : MonoBehaviour
             }
             else
             {
-                alertBoxText.text = "Water Cooldown, Can Use again in 1 second";
+                //alertBoxText.text = "Water Cooldown";
             }
         }
-        string temp = "Water: " + water.ToString();
-        alertBoxText.text = temp;
-        tempWaterPlaceholder.text = "Water: " + water.ToString();
+        //string temp = "Water: " + water.ToString();
+        //alertBoxText.text = temp;
+        //tempWaterPlaceholder.text = "Water: " + water.ToString();
+        if (water >= 10)
+        {
+            inventorySlotWaterSprite.GetComponent<Image>().sprite = waterFull;
+        }
+        if (water <= 6)
+        {
+            inventorySlotWaterSprite.GetComponent<Image>().sprite = waterTwoThirds;
+        }
+        if (water <= 3)
+        {
+            inventorySlotWaterSprite.GetComponent<Image>().sprite = waterOneThird;
+        }
+        if (water == 0)
+        {
+            inventorySlotWaterSprite.GetComponent<Image>().sprite = waterEmpty;
+        }
     }
 
     private void updateInventoryText()
@@ -380,70 +450,85 @@ public class NewTestMovement : MonoBehaviour
         //update Slot 1
         if (inventory[0] == 0)
         {
-            tempInventorySlot1.text = "Empty";
+            inventorySlotOneSprite.GetComponent<Image>().sprite = EmptySlot;
+            //tempInventorySlot1.text = "Empty";
         }
         else if (inventory[0] == 1)
         {
-            tempInventorySlot1.text = "Seed";
+            inventorySlotOneSprite.GetComponent<Image>().sprite = seed;
+            //tempInventorySlot1.text = "Seed";
         }
         else
+            inventorySlotOneSprite.GetComponent<Image>().sprite = carrot;
         {
-            tempInventorySlot1.text = "Crop";
+            //tempInventorySlot1.text = "Crop";
         }
 
         if (inventory[1] == 0)
         {
-            tempInventorySlot2.text = "Empty";
+            inventorySlotTwoSprite.GetComponent<Image>().sprite = EmptySlot;
+            //tempInventorySlot2.text = "Empty";
         }
         else if (inventory[1] == 1)
         {
-            tempInventorySlot2.text = "Seed";
+            inventorySlotTwoSprite.GetComponent<Image>().sprite = seed;
+            //tempInventorySlot2.text = "Seed";
         }
         else
         {
-            tempInventorySlot2.text = "Crop";
+            inventorySlotTwoSprite.GetComponent<Image>().sprite = carrot;
+            //tempInventorySlot2.text = "Crop";
         }
 
         //update Slot 2
         if (inventory[2] == 0)
         {
-            tempInventorySlot3.text = "Empty";
+            inventorySlotThreeSprite.GetComponent<Image>().sprite = EmptySlot;
+            //tempInventorySlot3.text = "Empty";
         }
         else if (inventory[2] == 1)
         {
-            tempInventorySlot3.text = "Seed";
+            inventorySlotThreeSprite.GetComponent<Image>().sprite = seed;
+            //tempInventorySlot3.text = "Seed";
         }
         else
         {
-            tempInventorySlot3.text = "Crop";
+            inventorySlotThreeSprite.GetComponent<Image>().sprite = carrot;
+            //tempInventorySlot3.text = "Crop";
         }
 
         //update Slot 3
         if (inventory[3] == 0)
         {
-            tempInventorySlot4.text = "Empty";
+            inventorySlotFourSprite.GetComponent<Image>().sprite = EmptySlot;
+            //tempInventorySlot4.text = "Empty";
         }
         else if (inventory[3] == 1)
         {
-            tempInventorySlot4.text = "Seed";
+            inventorySlotFourSprite.GetComponent<Image>().sprite = seed;
+            //tempInventorySlot4.text = "Seed";
         }
         else
         {
-            tempInventorySlot4.text = "Crop";
+            inventorySlotFourSprite.GetComponent<Image>().sprite = carrot;
+            //tempInventorySlot4.text = "Crop";
         }
 
         //update Slot 4
         if (inventory[4] == 0)
         {
-            tempInventorySlot5.text = "Empty";
+            inventorySlotFiveSprite.GetComponent<Image>().sprite = EmptySlot;
+            //tempInventorySlot5.text = "Empty";
         }
         else if (inventory[4] == 1)
         {
-            tempInventorySlot5.text = "Seed";
+            inventorySlotFiveSprite.GetComponent<Image>().sprite = seed;
+            //tempInventorySlot5.text = "Seed";
         }
         else
         {
-            tempInventorySlot5.text = "Crop";
+            inventorySlotFiveSprite.GetComponent<Image>().sprite = carrot;
+            //tempInventorySlot5.text = "Crop";
         }
 
     }
@@ -465,7 +550,7 @@ public class NewTestMovement : MonoBehaviour
         }
         else
         {
-            alertBoxText.text = "Seed Cooldown, Can Use again in 1 second";
+            //alertBoxText.text = "Seed Cooldown";
         }
         
         updateInventoryText();
@@ -528,7 +613,11 @@ public class NewTestMovement : MonoBehaviour
         updateCoins();
         updateScore();
         updateInventoryText();
-        audioSource.PlayOneShot(sellSound);
+        if (Time.time > sellSoundTimerNextUse)
+        {
+            sellSoundTimerNextUse = Time.time + sellSoundTimer;
+            audioSource.PlayOneShot(sellSound);
+        }
     }
 
     private void updateCoins()
@@ -551,13 +640,20 @@ public class NewTestMovement : MonoBehaviour
         if (temp * 5f < 180)
         {
             TimeLeft += temp * 5f;
+            visualTimer -= temp * 5f;
         }
         else
         {
             TimeLeft = 180;
+            visualTimer = 0;
         }
         updateCoins();
-        audioSource.PlayOneShot(sellSound);
+        if (Time.time > investInEcoSoundTimerNextUse)
+        {
+            investInEcoSoundTimerNextUse = Time.time + investInEcoSoundTimer;
+            audioSource.PlayOneShot(sellSound);
+        }
+       
     }
 
     private void investScore()
@@ -569,17 +665,25 @@ public class NewTestMovement : MonoBehaviour
         Debug.Log(temp2); ;
         updateScore();
         updateCoins();
-        audioSource.PlayOneShot(sellSound);
+        
+        if (Time.time > investInScoreSoundTimerNextUse)
+        {
+            investInScoreSoundTimerNextUse = Time.time + investInScoreSoundTimer;
+            audioSource.PlayOneShot(sellSound);
+        }
     }
 
     //Code refrenced in Timer Video Credit in variables
-    private void UpdateTimer(float current)
+    //Modified with slider
+    private void UpdateTimer(float current,float currentInverse)
     {
+        //currentInverse += 1;
         current += 1;
         float minuetes = Mathf.FloorToInt(current / 60);
         float seconds = Mathf.FloorToInt(current % 60);
-        TimerText.text = string.Format("{0:00} : {1:00}",minuetes,seconds);
-
+        //TimerText.text = string.Format("{0:00} : {1:00}",minuetes,seconds);
+        temperatureSlider.value = currentInverse / 180;
+        //Debug.Log(currentInverse/180);
     }
 
 
