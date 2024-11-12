@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+// using UnityEditor.PackageManager.Requests;
 
 public class NewTestMovement : MonoBehaviour
 {
@@ -357,7 +358,7 @@ public class NewTestMovement : MonoBehaviour
     }
         if (Input.GetKey(KeyCode.F))
         {
-            SceneManager.LoadScene(sceneName: "MainLevel");
+            Reset();
         }
     }
 
@@ -698,6 +699,16 @@ public class NewTestMovement : MonoBehaviour
     {
         //pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(sceneName: "MainLevel");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 }
