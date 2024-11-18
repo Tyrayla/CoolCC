@@ -7,11 +7,16 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("MainLevel");
+        SceneManager.LoadSceneAsync("Tutorial");
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadSceneAsync("Credits");
     }
 }

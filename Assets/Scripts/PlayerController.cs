@@ -346,13 +346,11 @@ public class NewTestMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.P) && paused == false)
             {
                 Pause();
-                paused = true;
                 //SceneManager.LoadScene(sceneName:"PauseMenu");
             }
             if (Input.GetKey(KeyCode.R) && paused == true)
             {
                 Resume();
-                paused = false;
                 //SceneManager.LoadScene(sceneName:"MainLevel");
             }
     }
@@ -692,12 +690,14 @@ public class NewTestMovement : MonoBehaviour
     public void Pause()
     {
         //pauseMenu.SetActive(true);
+        paused = true;
         Time.timeScale = 0f;
     }
 
     public void Resume()
     {
         //pauseMenu.SetActive(false);
+        paused = false;
         Time.timeScale = 1f;
     }
 
@@ -708,7 +708,7 @@ public class NewTestMovement : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene(sceneName: "StartMenu");
     }
 
 }
