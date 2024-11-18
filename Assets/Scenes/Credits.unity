@@ -246,7 +246,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 856692840780563164, guid: fa83666016ad39843b514bb488040576, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -440,8 +440,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 61}
-  m_SizeDelta: {x: 600, y: 50}
+  m_AnchoredPosition: {x: -231.7, y: -52.6}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515988759
 MonoBehaviour:
@@ -463,9 +463,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\nProducer: Adam Culver\nProgrammer: Carlos Matteo\nProgrammer: Cade O\u2019conner\nVisual
-    Artist: Sheccid Tellez\nSound Artist: Alex Shepardson\nQA Engineer: Dane Dal
-    Bianco"
+  m_text: 'Producer: Adam C. @RentheDumb
+
+    Lead Designer: Carlos M. @CMatteo5
+
+    Lead
+    Programmer: Cade O. @PretzelEra
+
+    Lead Visual Artist: Cid T. @dkoshell
+
+    Lead
+    Sound Artist: Alex S. @Tyrayla
+
+    Head QA Engineer: Dane D. @gokeck'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -474,8 +484,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4284217963
-  m_fontColor: {r: 0.41833055, g: 0.9811321, b: 0.35635456, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -603,7 +613,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 856692840780563164, guid: fa83666016ad39843b514bb488040576, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -878,7 +888,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -7352339073622421304, guid: 3c701ac205a529c40a9942c82ba50f13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1151,9 +1161,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1630950827}
+  - {fileID: 1473313832}
   - {fileID: 56958318}
   - {fileID: 741723995}
   - {fileID: 1018214789}
   - {fileID: 825500716}
   - {fileID: 24405245}
-  - {fileID: 1473313832}
