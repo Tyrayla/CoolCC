@@ -310,7 +310,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 380, y: -130}
-  m_SizeDelta: {x: 140, y: 70}
+  m_SizeDelta: {x: 130, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &112325661
 MonoBehaviour:
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 50315188104904361, guid: 688790282552a68468451c737c91790d, type: 3}
+  m_Sprite: {fileID: -3451699440861859892, guid: 3943c730e45918c44b395f1f0eb78ff5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -440,7 +440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -231.7, y: -52.6}
+  m_AnchoredPosition: {x: -231.7, y: 22.3}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &515988759
@@ -463,19 +463,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Producer: Adam C. @RentheDumb
+  m_text: 'A game by Cool CC
 
-    Lead Designer: Carlos M. @CMatteo5
+    Code: Alex Shepardson, Cade o''conner, Carlos
+    Matteo
 
-    Lead
-    Programmer: Cade O. @PretzelEra
+    Art: Sheccid Tellez
 
-    Lead Visual Artist: Cid T. @dkoshell
+    Sound: Alex Shepardson
 
-    Lead
-    Sound Artist: Alex S. @Tyrayla
+    Music: Adam
+    Culver
 
-    Head QA Engineer: Dane D. @gokeck'
+    Lead Testing: Dane Dal Bianco
+
+    Producer: Adam Culver'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
